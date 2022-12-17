@@ -1,0 +1,58 @@
+\input{preamble}
+
+\begin{document}
+
+\title{Meeting 02.12.2022}
+\author{Diogo Freire de Andrade}
+
+
+\maketitle
+\tableofcontents
+
+\section{What I want to talk about}
+
+I have been thinking about a lot of stuff as usual. Last time we spoke I was a bit annoyed by the fact that I still don't entirely grasp the ins and outs of Factorization homology - I think this has mostly to do with the fact that I have been trying to read too many things, none of them sufficiently in-depth. I am not sure whether I have necessarily solved this issue or not, but hopefully it will all workout in the end. 
+
+This past week I have floated around many things:
+\begin{itemize}
+    \item I have delved somewhat into the work of Juliet Cooke, whose PhD thesis consisted of proving that framed Factorization Homology with coefficients in ${\sf Rep}_q(\frak{g})$ and target $\Cat^\times$, the symmetric monoidal $(2,1)$-category of $\bf{k}$-linear categories, linear functors and natural isomorphisms associated to a framed closed $2$-manifold $M$, corresponds to the \emph{Skein category} ${\sf Sk}_{{\sf Rep}_q(\mathfrak{g})}(M),$ whose objects are collections of disjoint framed, directed, labeled (by objects in $\cV$) points in $M$ and morphisms correspond to ribbon graphs in $M\times [0,1]$ compatible with the source and target modulo local relations (like a 3-dimensional analogue of the string-net construction, where spherical is replaced by ribbon). 
+    \item We could easily say that my thesis (and other works before me, yet I think using string-nets and coends together was only done "hand-wavingly" by Walker) prove that string-nets satisfy $\ot$-excision, hence the string-net functor ${\sf SN}\colon \Man^{\Or,\sqcup}_2\colon \Cat^\times$ corresponds to Factorization Homology with coefficients in something something... In fact, writing this I realized how I am not sure about a lot of things: Immediately, I thought the String-Net construction would be a symmetric monoidal $(\infty,1)$-functor ${\sf SN}\colon \man^{\Or}\ra \Cat^{\times}$. Recall that Factorization homology is the left Kan extension
+    \[\begin{tikzcd}
+	{\Disk_{n}^{\Or,\sqcup}} & {\Cat^{\times}} \\
+	{\man_n^{\Or,\sqcup}}
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow["A", from=1-1, to=1-2]
+	\arrow["{\int_{(-)}A}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\] This means that the input to this construction should be an $\sE_2$-algebra, and $\sE_2$-algebras in $\Cat^\times$ are in correspondence with balanced (braided) monoidal categories. This comes into contradiction with the fact that, in my mind, the input category is a spherical fusion category $\cC$. Yet, spherical fusion categories do not come with a braided, let alone balanced, structure. 
+    \item My first reaction was to try and bring down the dimension to $1$ and, indeed, things workout, yet the result is not at all what I had in mind. The way it works is that \[\int_{I}\cC = \cC, \quad \int_{S^{1}}\cC = \cZ(\cC).\] Ok.... Well already something more interesting was starting to appear, because after all it seems like $\int_M \cC$ is instead computing the boundary conditions for Turaev-Viro i.e., equivalent to string-net TQFT.
+    \item At some point it dawned on me that $\cZ(\cC)$ can be made an input to the ``next"-dimensional factorization construction in $\Cat^\times$, since $\cZ(\cC)$ is a modular category whenever $\cC$ is spherical fusion (proved by M\"uger a couple of years ago), and in particular balanced. If If I did so, I would get the theory of skein categories Juliet and Kirillov worked on, and which (not incidentally) corresponds to the 3-2 part of the 4-3-2-1-0 Crane-Yetter TQFT, in other words it provides the category of boundary conditions for its "first" extension, which matches with what we got in dimension $1$.
+    \item What threw me off was the fact that I thought that factorization homology would probably reflect the fact that $\cZ(\cC)$ is equivalent to the category of modules of the tube category, and as didn't turn out to add up. The reason I had this outcome in mind was the following: whenever you have an $(n-1)$-dimensional oriented manifold $N$ and an $E_n$-algebra $\cC$, the $n$-dimensional thickening $N\times [0,1]$, or tube associated to $N$, factorization homology produces an $E_1$-algebra structure on $\int_{N\times I}\cC$ induced by stacking i.e., via the embedding $$(N\times I)\sqcup (N\times I) \cofib N\times I$$ which via the pushforward constructs a $1$-morphism in $\Cat^\times$, or a functor \[\bigg(\int_{N\times I}\cC\bigg)\boxtimes \bigg(\int_{N\times I}\cC\bigg) \ra \int_{N\times I}\cC\] In context of the symmetric monoidal $(\oo,1)$-category $\Cat^\times$ this means that $\int_{N\times I}\cC$ is a tensor catgeory, so it has a good theory of left and right modules to be exploited. Especially since, by $\ot$-excision, we get that if $M$ is an $n$-dimensional manifold and $N\in \partial M$ is a boundary component of $M$ such that we fix a diffeomorphism $N\times [0,1]\cong N\subseteq M,$ then we have \[\bigg(\int_{{\sf int}(M)}\cC\bigg)\underset{\int_{N\times I}\cC}{\boxtimes}\bigg(\int_{N\times I}\cC\bigg)\simeq \int_{M}\cC\] meaning that $\int_M \cC$ has a natural module structure over $\int_{N\times I}\cC.$ Where here $\underset{\int_{N\times I}\cC}{\boxtimes}$ corresponds to the relative Kelley-Deligne tensor product.
+    \item Juliet proves this result using a remark we made on our last meeting. Factorization Homology is the universal object of $\Fun^\ot(\man^{\Or ,\sqcup}_n, \cV)$ that satisfies $\ot$-excision.
+    \item Juliet's work is closely related to the work of Kirillov Jr. and his student. They have a paper, corresponding to his PhD thesis, titled "Factorization Homology and 4D TQFT".
+\end{itemize}
+
+\subsection{Factorization Homology and State-Sums}
+
+Last Friday during our meeting, we put forward the question: "Is the \textbf{state-sum conjecture} trivially true?", and both us sort of shrugged it off as a legitimate possibility, yet none of us, or any of our peers, for that matter, has really written down a solution, so I am guessing it's either false or interestingly hard, and my guess is that it is interestingly hard. Even if it's false, It would be good to come up with what kind of structure obstructs the correspondence.  
+
+I think proving this conjecture might require some interesting insights, and I would be surprised if at least the tools developed to construct Factorization Homology end up playing no part. In addition, the geometrico-combinatorial machinery of \textbf{Manifold $n$-diagrams} also seem to be fertile with useful ideas and results. In particular, understanding Factorization Homology through the lens of Manifold $n$-diagrams is something that 
+
+
+\subsection{Comparing Manifold $n$-diagrams with Disk Stratifications}
+In the paper \textit{``Factorization Homology I: Higher Categories"}, Ayala and Francis construct the pairing \[\int_{M}\cC,\] where $\cC$ is an $(\oo,n)$-category, $M$ is a vari-framed compact stratified $n$-manifold. More explicitly, it is a functor 
+\[\int\colon \Cat_{(\oo,n)}\ra \fun(\cMfd_n^{\vfr},\spaces).\]
+
+This pairing is constructed in steps. 
+\begin{enumerate}
+    \item They construct an $\oo$-category $\cBun$, whose objects are compact conically smooth stratified spaces and whose morphisms include refinements and stratum-creating maps. This ingredient is entirely reminiscent of the construction of the topologically enriched category of stratified $n$-mesh bundles $\cS{\sf tratMeshBun}_n$ of Dorn-Douglas. From the $\oo$-category $\cBun$ we can restrict to the $\oo$-subcategory $\cDisk$ of objects which are disk-stratified. Then they spend a good amount of effort introducing the notion of vari-framing which is short for variform framing on a stratified space, which consists of a framing on each stratum together with compatibilities between framings in links of strata, which I strongly suspect to be intimately related to the notion of \textbf{Framed Space} and \textbf{Framed Regular Cell} of  Dorn-Douglas.
+
+    This leads Ayala-Francis to the construction of $\cDisk^{\vfr}$, as being the $\oo$-category which has as objects collections of compact disk-stratified manifolds of dimension less than or equal to $n$ and equipped with a vari-framing. Now, in my mind this construction should be equivalent to the central objects in the work of Dorn-Douglas: the \textbf{Manifold $n$-diagrams} and/or \textbf{$n$-tangles} - these are (tame) stratifications of the closed or open cube $(0,1)^n$ which are (tame) \textit{framed conical}. What is potentially interesting here is that nowhere in their work do they construct a category of manifold $k$-diagrams for $k\leq n,$ which would seem to be the most comparable thing to $\cDisk^{\vfr}.$  
+
+    The last piece of technology needed is an $\oo$-category of \textbf{labeling systems}, which is achieved via \[\fun(\cDisk^{\vfr}_n,\spaces).\] 
+    \item Secondly, they construct a functor out of Joyal's category \[\langle -\rangle\colon \btheta_n^{\op} \ra \cDisk_n^{\vfr}\] called the \textit{cellular realization functor}, which is morally meant to take an object in $\btheta_n$ to its associated pasting diagram, which is further interpreted as a stratified space (as they point out in their paper, the category $\cDisk_n^{\vfr}$ is essentially ``crafted just so that this cellular realization functor exists and is fully faitful"). I strongly suspect that the way this bit of Ayala-Francis sneaks into Dorn-Douglas is via their "Duality of manifold diagrams and cell diagrams" - actually reading both I am pretty convinced of this. In fact I think it is the least hard part in comparing their works.
+    \item Lastly one "does the category theory": recall that there is a 
+
+    \item In the end they mention that $\int_M \cC$ is \textbf{``the integral, or average, of sufficiently fine $\cC$-labeled vari-framed refinements of $M$"}. The fact they describe this using a left Kan extension has the added advantage of making this idea not only precise, but also functorial in $M$ up to coherent homotopy.
+    \item They also give a glimpse of how hard it is to compute this (as usual), since the only example they use of this machinery in practice is the following: for each $0\leq i \leq n$, and for each $(\oo,n)$-category $\cC$, the value $\int_{\mathbf{D}^i}\cC$ corresponds to the space of $i$-morphisms of $\cC,$ in particular \[\int_\ast \cC = \int_{\mathbf{D}^{0}}\cC\simeq \cC^\sim\] corresponds to the space of objects of $\cC$ i.e., its underlying $\oo$-groupoid.
+\end{enumerate}
+\end{document}

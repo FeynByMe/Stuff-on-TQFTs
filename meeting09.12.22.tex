@@ -1,0 +1,221 @@
+\input{preamble}
+
+
+\begin{document}
+
+
+\title{Meeting 09.12.2022 - Symmetric Monoiodal Categories}
+\author{Diogo Freire de Andrade}
+
+
+\maketitle
+\tableofcontents
+
+\section{Some Higher Algebra}
+\subsection{$\oo$-operads}
+\begin{itemize}
+\item In generalizing the idea of a commutative monoid one is met by a prohibitive need to supply coherence data and conditions. This means that in advancing to an $\oo$-categorical setting a different approach is required.
+\end{itemize}
+\begin{construction}
+    Let $(\cC,\ot)$ be a symmetric monoidal category. We define a new category as follows:
+    \begin{enumerate}
+        \item An object of $\cC^\ot$ is given by a (possibly empty) sequence of objects in $\cC$, which we will denote by $[C_1,\ldots,C_n]$.
+        \item A morphism from $[C_1,\ldots,C_n]\ra [C_1',\ldots,C_m']$ is determined by specifying a subset $S\subseteq \{1,\ldots,n\}$, a function $\alpha\colon S \ra \{1,\ldots,m\}$, and a collection of morphisms \[\{f_j\colon \bigotimes_{\alpha(i)=j} C_i \ra C_j'\}_{1\leq j\leq m}\] in the category $\cC.$
+        \item Given a pair of morphisms $f\colon [C_1,\lots, C_n]\ra [C_1',\ldots,C_m']$ and $g\colon [C'_1,\ldots,C_m'] \ra [C''_1,\ldots,C''_l]$ in $\cC^{\ot}$, with determining subsets $S\subseteq \{1,\ldots,n\}$ and $T\subseteq \{1,\ldots, m\}$ together with maps $\alpha\colon S \ra \{1,\ldots, m\}$ and $\beta \colon T \ra \nlist{l}$. The composition $g\circ f$ is given by the subset $U=\alpha^{-1}T\subseteq\nlist{n}$ and composite map $\beta\colon \alpha \colon U \ra \nlist{l}$, and the maps \[\bigotimes_{(\beta\circ \alpha)(i)=k}C_i\simeq \bigotimes_{\beta(j)=k}\bigotimes_{\alpha(i)=j}C_i \ra \bigotimes_{\beta(j)=k} C_j'1 \ra C_{k}''\] for $1\leq k\leq l.$ 
+    \end{enumerate}
+\begin{notation}
+    For any finite set $I$, let $I_\ast$ denote the set $I\sqcup\{\ast\}$ obtained from $I$ by adjoining a new element $\ast$. For each $n\geq 0$, we let $\langle n\rangle ^{\circ}$ denote the set $\{1,2,\ldots,n-1,n\}$ and $\langle n\rangle =\langle n\rangle_\ast^{\circ}$ the pointed set obtained by adjoining a disjoint base point $\at$ to $\langle n \rangle ^\circ.$ We define a category $\Fin_\ast$ as follows:
+    \begin{enumerate}
+        \item The objects of $\Fin_\ast$ are the sets $\langle n \rangle,$ where $n\geq 0.$
+        \item Given a pair of objects $\langle m \rangle$,$\langle n \rangle \in\Fin_\ast$, a morphism between them is a map $\alpha\colon \langle n\rangle \ra \langle m\rangle$ such that $\alpha(\ast)=\ast.$
+    \end{enumerate}
+    For every pair of integers $0\leq i\leq n$, we let $\rho^{i}\colon \langle n\rangle \ra \langle 1\rangle$ denote the morphism given the formula \[ \rho^{i}(j) = \begin{cases} 1 & \text{ if } i=j \\ \ast & \text{ otherwise. }  \end{cases}\]
+\end{notation}
+\end{construction}
+
+\subsection{A small digression on Grothendieck (op)fibrations}
+In the next subsection we conclude that the forgetful functor $\cC^\ot \ra \Fin_\ast$ is a \textbf{Grothendieck op-fibration} and we show that the symmetric monoidal structure on a category $\cC$ is determined up to symmetric monoidal equivalence by the category $\cC^\ot$ together with its forgetful functor $\cC^\ot \ra \Fin_\ast.$ Before we do that is good to look into what are Grothendieck op-fibrations.
+
+Let $p\colon \cC\ra \cD$ be a functor between ordinary categories, and let $\d\in\cD$ be an object. We denote $\cC_d$, the \textbf{fibre} of $p$ over $d$, defined as the pullback category 
+\[\begin{tikzcd}
+	{\cC_d} & \cC \\
+	{[0]} & \cD
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=1-1, to=1-2]
+	\arrow["p", from=1-2, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+\end{tikzcd}\]
+We immediately get that $\cC_d$ is the (not full, in general) subcategory of $\cC$ whose objects $c$ project to $d\in\cD$ i.e. $d=p(c),$ and those morphisms $f\colon c \ra c'$ which project down to the identity $\id_d \colon d =p(c) \ra p(c')=d.$ In other words, the data we associate to a functor $p\colon \cC\ra \cD$ is equivalent to a collection of categories $\{\cC_d\}_{d\in\cD}$ parametrized by the objects in $\cD.$
+
+To understand what are op-fibrations let us try to find conditions on the functor $p$ such that its fibres $\cC_d$ depend \textbf{covariantly} (a fibration would be defined by looking for conditions ensuring contravariance of the fibres) on the object $d\in\cD.$ 
+\begin{definition}
+    Let $p\colon \cC \ra \cD$ be a functor and let $f\colon c_1 \ra c_2$ be a morphism in $\cC$ with image $p(f)=\alpha\colon d_1 \ra d_2$. We say that $f$ is $p$-\textbf{coCartesian} or a $p$-\textbf{coCartesian lift} of $\alpha$ if: given any morphism $h\colon c_1\ra c_3$ with image $p(h)=\gamma \colon d_1 \ra d_3$, and every $\beta \colon d_2 \ra d_3$ such that $\beta \circ \alpha = \gamma$, then there exists a \textbf{unique} morphism $g \colon c_{2}\ra c_3$ such that \[g\circ f = h, \quad p(g) = \beta.\]
+\end{definition}
+\begin{remark}
+    This definition looks particularly heavy and awkward. To unpack it note that the defining property of a $p$-coCartesian morphism is given by the following commutative diagram 
+
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{c_1} \& {c_2} \\
+	\& {} \& {c_3} \\
+	{d_1} \& {d_2} \\
+	\&\& {d_3}
+	\arrow[from=3-1, to=3-2]
+	\arrow[""{name=0, anchor=center, inner sep=0}, from=3-2, to=4-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, curve={height=18pt}, from=3-1, to=4-3]
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\exists!}", dashed, from=1-2, to=2-3]
+	\arrow[from=2-3, to=4-3]
+	\arrow["\forall"{description}, curve={height=18pt}, from=1-1, to=2-3]
+	\arrow[from=1-1, to=3-1]
+	\arrow[shorten <=28pt, from=1-2, to=3-2]
+	\arrow[shorten >=30pt, no head, from=1-2, to=3-2]
+	\arrow["\circlearrowleft"{description}, shift left=3, draw=none, from=1, to=0]
+\end{tikzcd}\]
+which should immediately resemble a left inner 2-horn extension for those in the know (this is an important motivator and source of intuition for the generalization of fibrations in the $\oo$-categorical setting), and that is because it in fact is. From our discussion on the lifting calculus we know that $f$ will be a $p$-coCartesian lift for $\alpha$ if and only if the following commutative diagram 
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\hom_\cC(c_2,c_3)} \& {\hom_\cC(c_1,c_3)} \\
+	{\hom_\cD(p(c_2),p(c_3))} \& {\hom_\cD(p(c_1),p(c_3))}
+	\arrow["p", from=1-2, to=2-2]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{p(f)^\ast}"', from=2-1, to=2-2]
+	\arrow["{f^\ast}", from=1-1, to=1-2]
+	\arrow["p"', from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=0]
+\end{tikzcd}\] is a pullback diagram for all objects $c_3\in \cC.$
+\end{remark}
+\begin{observation}\label{obs: uniqueness of lift with fixed domain}
+    This allows us to conclude that a pair of $p$-coCartesian lifts for $\alpha$ which share the same domain object are essentially unique i.e. unique up to a unique isomorphism. To see why this is true, notice that given a pair of $p$-coCartesian lifts $f'\colon c \ra c'$ and $f''\colon c \ra c''$ of a morphism $\alpha$  we have that, $f'$ and $f''$ are both pullbacks of $p(f')=p(f'')=\alpha$ along $p$, which means that by the universal property of pullbacks there exists a unique isomorphism \[\hom_\cC(c',c_3)\simeq \hom_\cC(c'',c_3)\] for all $c_3\in\cC$. By the Yoneda lemma this implies the existence of a unique isomorphism $\varphi \colon c' \ra c''$ which is compatible with the pullback diagrams such that \[\varphi\circ f' = f''.\] Also, note that the isomorphism $\varphi \colon c' \ra c''$ belongs to the fiber $\cC_{p(c)'}=\cC_{p(c'')}.$
+\end{observation}
+This prompts us to come up with the following definition.
+\begin{definition}
+A functor $p\colon \cC \ra \cD$ is called a \textbf{Grothendieck op-fibration} if for all objects $c_1\in \cC$ and for all morphisms $\alpha\colon p(c_1)\ra d$, there is a $p$-coCartesian lift $f\colon c_1 \ra c_2$ of $\alpha.$ 
+\end{definition}
+\begin{construction}
+    This means that if $p$ is an op-fibration, then for each $c\in \cC$ we can \textit{choose} for each morphism $\alpha\colon p(c)\ra d$ a $p$-coCartesian lift. Fixing an arbitrary morphism $\alpha \colon d_1 \ra d_2$ let us define the following map \[\alpha_{!}\colon \cC_{d_1}\ra \cC_{d_2}\] by sending $c_1 \mapsto c_2$, where $c_2$ is the codomain of some $p$-coCartesian lift $f\colon c_1 \ra c_2$ of $\alpha.$ ~
+
+    We are now close to achieving the thing we set out to achieve in the beginning of this subsection, which was to find a condition on $p$ for there to be a covariant dependence of the fibres of $p$ $\cC_d$ on objects of $\cD.$ $\alpha_!$ serves a prime candidate for the job, but first we should check that it is in fact a functor.
+    
+    Let $\beta\colon d_2 \ra d_3$ in $\cD$ be another morphism in $\cD$ then we get a pair of functors \[\cC_{d_1}\xra{\alpha_!}\cC_{d_2}\xra{\beta_!} \cC_{d_3}, \quad \cC_{d_{1}}\xra{(\beta\circ \alpha)_!}\cC_{d_2}\] which in so far as our mission goes, we would like to be the same functor. (Un)fortunately this is not the case, instead, as a direct consequence of the fact that there are choices involved in producing either one of the three functors $\alpha_!,\beta_!$ and $(\beta\circ \alpha)_!$ (I sneakily implied here that the composition of $p$-coCartesian lifts is again a $p$-coCartesian lift), but as we had observed in Observation \ref{obs: uniqueness of lift with fixed domain}, any two $p$-coCartesian lifts against a pair of morphisms with the same domain induces a unique isomorphism between the targets of the lifts. These isomorphisms combine to produce a unique natural isomorphism \[\beta_!\circ \alpha_! \simeq (\beta\circ \alpha)_!\] between the two functors 
+    \begin{tikzcd}[ampersand replacement=\&]
+	{\cC_{d_1}} \& {\cC_{d_3}}.
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\beta_!\circ \alpha_!}", curve={height=-6pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{(\beta\circ \alpha)_!}"', curve={height=6pt}, from=1-1, to=1-2]
+    \end{tikzcd}
+\end{construction}
+\subsection{Reconstructing symmetric monoidal categories}
+\begin{remark}
+    We note that if $\alpha\colon \langle n\rangle \ra \langle m\rangle$ is a morphism in $\Fin_\ast$ it is convenient to think of $\alpha$ as a partially defined map from $\langle n \rangle^{\circ}$ to $\langle m \rangle^{\circ}$: namely, $\alpha$ is given by specifying a subset $$S=\alpha^{-1}(\langle m \rangle^{\circ})\subseteq \langle n \rangle$$ together with the map $S \ra \langle m \rangle^{\circ}.$ This helps us draw a parallel between $\cC^{\ot}$ and $\Fin_\ast$, which is what we do next.
+\end{remark}
+\begin{construction}
+    For every symmetric monoidal category $\cC$, there exists a forgetful functor $p\colon \cC^{\ot} \ra \Fin_{\ast}$ which sends an object $[C_1,\ldots,C_n]$ to $\langle n \rangle$ and sends a morphism \[(S,\alpha\colon S \ra \langle m \rangle, \{f_j\}_{j\in\langle m \rangle}) \mapsto (S,\alpha).\]
+
+    This functor is a Grothendieck op-fibration. This follows from the fact that:
+    \begin{enumerate}
+    \item[(M1)]\label{monoidal char1} Given any object $C=[C_1,\ldots,C_n]\in\cC^{\ot}$ and any morphism $f\colon p(C) = \langle n \rangle  \ra \langle m \rangle$ in $\Fin_\ast$, there exists a morphism \[\overline{f}\colon C \ra C'\] in $\cC^{\ot}$, corresponding to a $p$-coCartesian lift of $f\colon \langle n \rangle \ra \langle m \rangle$ which is moreover universal in the sense that \[\overline{f}^{\ast} \colon \hom_{\cC^{\ot}}(C',C'') \xra{\simeq} \hom_{\cC^{\ot}}(C,C'') \underset{\hom_{\Fin_{\ast}}(\langle n\rangle,\langle l \rangle)}{\times} \hom_{\Fin_{\ast}}(\langle m \rangle,\langle l \rangle)\] preocomposition with $\overline{f}$ induces a bijection. To do this we just have to pick $\overline{f}$ such that $$\overline{f}_{j}\colon \bigotimes _{f(i)=j}C_i \ra C_j$$ is an isomorphism for every $j\in \langle m \rangle$, with this choice being done up to the obvious canonical isomorphisms we get by using the underlying symmetric monoidal machinery of $\cC.$ 
+    
+    \item[(M2)]\label{monoidal char2} If we denote by $\cC^{\ot}_{\langle n \rangle}$ the fibre of $p$ over $\langle n \rangle\in \Fin_\ast$, then $\cC^{\ot}_{\langle 1 \rangle}$ is equivalent to $\cC.$ More generally, $\cC^{\ot}_{\langle n \rangle}$ is equivalent to an $n$-fold product of copies of $\cC.$ We get that is equivalence is induced by \[\prod_{0\leq i \leq n}\rho^{i}\colon \langle n \rangle \ra \langle 1 \rangle^{\times n}\] in $\Fin_\ast$. Note that $\rho^{i}_!([C_{1}\ldots,C_n]) \simeq [C_{i}]$ via a canonical isomorphism associated to the $p$-coCartesian lift of $\rho^i$, which implies that $$\sigma = \rho^{1}_!\times \cdots \times\rho^{n}_!([C_1,\ldots,C_n])\simeq [C_1]\times\cdots \times [C_{n}],$$ implying the essential surjectivity of the functor $\sigma$. The fully-faithfulness is also easy to check.
+    These maps have a name, they're called \textbf{Segal maps} \[\sigma = (\rho^{1}_!,\cdots,\rho^{n}_!)\colon \cC^{\ot}_{\langle n\rangle} \xra{\simeq} \cC^{\ot}_{\langle 1 \rangle }\times \cdots \times \cC_{\langle 1 \rangle}^{\ot},\] and as we have seen they form categorical equivalences. When this is the case we say the Grothendieck op-fibration $p\colon \cC^{\ot} \ra \Fin_\ast$ satisfies the \textbf{Segal condition.} 
+    \end{enumerate}
+
+Pairing these two conditions, which we hereafter subsume under the claim that $p\colon \cC^\ot \ra \Fin_\ast$ is a Grothendieck op-fibration satisfying the Segal condition, we are able to reconstruct the canonical isomorphisms which determine the symmetric monoidal structure of $\cC$ up to symmetric monoidal equivalence. More precisely, assume we have an ordinary category $\cD$ and a Grothendieck op-fibration $p\colon \cD \ra \Fin_\ast$ which satisfies the Segal condition and define $\cC := \cD_{\langle 1 \rangle}$ to be the fibre over $\langle 1 \rangle.$
+\begin{remark}
+    From the fact that the forgetful functor is an op-fibration, we derive a functor $$\cC^{\ot}_{\langle n\rangle} \xra{\alpha_!} \cC^{\ot}_{\langle m \rangle}$$ for every map $\alpha\colon \langle n \rangle \ra \langle m \rangle$ in $\Fin_\ast$, which is well-defined up to canonical isomorphism (recall that pseduo-functorial covariant dependence was the best we were able to achieve in the last section).
+\end{remark}
+\begin{enumerate}
+    \item The Segal condition for $n=0$ tells us that, since there is a unique morphism $\langle 0 \rangle \ra \langle 1 \rangle$ in $\Fin_\ast$, we get a unique, up to canonical isomorphism, functor \[\cD_{\langle 0 \rangle} \ra \cD_{\langle 1 \rangle} = \cC,\] which we can identify with $1\in \cC$. 
+    \item Let us consider the map $\alpha\colon \langle 2 \rangle \ra \langle 1 \rangle $ for which $\alpha^{-1}(\{1\})?\langle 2 \rangle 1^{\circ}$. More explicitly, it is defined by \[\alpha(1)=\alpha(2)=1, \quad \alpha(\ast)=\ast.\] Using the fact that the forgetful functor $p$ is an op-fibration we can lift the maps $\alpha,\rho^1,$ and $\rho^2$ to functors \[\cC\times\cC =\cD_{\langle 1 \rangle}\times\cD_{\langle 1 \rangle}\xla{\rho^{1}_!\times \rho^{2}_!}\cD_{\langle 2 \rangle} \xra{\alpha_!} \cD_{\langle 1\rangle}\simeq \cC.\] Using the Segal condition we get that the map on the left is an equivalence of categories, allowing us to construct a map \[\cC\times \cC \xra{\alpha_!\circ(\rho^{1}_!\times \rho^{2}_!)^{-1}} \cC\] which we will rightfully denote as $\ot.$
+    \item Consider the automorphism $\tau\colon \langle 2 \rangle \ra \langle 2 \rangle$ defined by swapping $1,2\in \langle 2 \rangle.$ We get the following straightforwardly commutative digram in $\Fin_\ast$
+    \[\begin{tikzcd}[ampersand replacement=\&]
+	\& {\langle 2 \rangle } \\
+	\& {\langle 2 \rangle} \\
+	{\langle 1 \rangle \times \langle 1 \rangle} \&\& {\langle 2 \rangle}
+	\arrow["\alpha"{description}, from=2-2, to=3-3]
+	\arrow["{\rho^{1}\times \rho^{2}}"{description}, from=2-2, to=3-1]
+	\arrow["\tau"{description}, from=1-2, to=2-2]
+	\arrow["\alpha", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\rho^{2}\times\rho^1}"', curve={height=12pt}, from=1-2, to=3-1]
+\end{tikzcd}\] which we can lift to the diagram
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\& {\cD_{\langle 2 \rangle}} \\
+	\& {\langle 2 \rangle} \\
+	{\cD_{\langle 1 \rangle}\times \cD_{\langle 1 \rangle}} \&\& {\cD_{\langle 2 \rangle}}
+	\arrow["\alpha"{description}, from=2-2, to=3-3]
+	\arrow["{\rho^{1}_!\times \rho^{2}_!}"{description}, from=2-2, to=3-1]
+	\arrow["{\tau_!}"{description}, from=1-2, to=2-2]
+	\arrow["{\alpha_!}", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\rho^{2}_!\times\rho^1_!}"', curve={height=12pt}, from=1-2, to=3-1]
+	\arrow["{\ot }"', dashed, from=3-1, to=3-3]
+\end{tikzcd}\]
+which commutes up to canonical isomorphism. This implies, in particular, that \[(\rho^{2}_!\times \rho^{1}_!)^{-1}\circ \alpha_! \simeq (\rho^{1}_!\times \rho^{2}_!)^{-1}\circ \alpha_!,\] which translates into \[x\ot y \simeq y\ot x\] for all $x,y\in\cC=\cD_{\langle 1 \rangle}$. These canonical isomorphisms assemble into a symmetric swap map.
+    \item Let us define, for $1\leq i < n$ a collection of maps $\tau^{n}_i\colon \langle n \rangle \ra \langle 1 \rangle$ in $\Fin_\ast$, by the following formula \[
+    \tau^{n}_i(j) = \begin{cases}
+        j & \text{ if } 1\leq j \leq i \\
+        j-1 & \text{ if } i < j \leq n \\
+        \ast & \text{ if } j = \ast.
+    \end{cases}
+    \] For $n=3$ we have only two options $\tau^{3}_2,\tau^{3}_1\colon \langle 3 \rangle \ra \langle 2 \rangle$. These are defined by 
+    \[\begin{tikzcd}[ampersand replacement=\&,row sep=small]
+	1 \& 1 \\
+	2 \& 2 \\
+	3
+	\arrow[maps to, from=1-1, to=1-2]
+	\arrow[maps to, from=2-1, to=2-2]
+	\arrow[maps to, from=3-1, to=2-2]
+\end{tikzcd} \text{ and } \begin{tikzcd}[ampersand replacement=\&,row sep=small]
+	1 \& 1 \\
+	2 \& 2 \\
+	3
+	\arrow[maps to, from=1-1, to=1-2]
+	\arrow[maps to, from=3-1, to=2-2]
+	\arrow[maps to, from=2-1, to=1-2]
+\end{tikzcd}\] respectively. Moreover, the map $\alpha$ we have used in constructing $\ot$ corresponds to $\tau^{2}_1\colon \langle 2 \rangle \ra \langle 1 \rangle,$ and all these maps fit into the following commutative diagram
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\langle 3 \rangle} \& {\langle 2 \rangle} \\
+	{\langle 2 \rangle} \& {\langle 1 \rangle}
+	\arrow["{\tau^{3}_2}", from=1-1, to=1-2]
+	\arrow["{\tau^{2}_1}", from=1-2, to=2-2]
+	\arrow["{\tau^{3}_1}"', from=1-1, to=2-1]
+	\arrow["{\tau^{2}_1}"', from=2-1, to=2-2] 
+\end{tikzcd}\] which lifts, up to canonical isomorphism, to a functorial commutative diagram 
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\cD_{\langle 3 \rangle}} \& {\cD_{\langle 2 \rangle}} \\
+	{\cD_{\langle 2 \rangle}} \& {\cD_{\langle 1 \rangle}}
+	\arrow["{\tau^{3}_{{2}_{!}}}", from=1-1, to=1-2]
+	\arrow["{\tau^{2}_{{1}_{!}}}", from=1-2, to=2-2]
+	\arrow["{\tau^{3}_{{1}_{!}}}"', from=1-1, to=2-1]
+	\arrow["{\tau^{2}_{{1}_{!}}}"', from=2-1, to=2-2]
+\end{tikzcd}\] which if we pair together with the isomorphisms $\cC^{\times n} \simeq \cD_{\langle n\rangle}$ gives us functorial isomorphisms \[(x\ot y)\ot z \simeq x \ot (y\ot z)\] for all $x,y,z\in \cC.$
+\item Almost by magic, MacLane's pentagon axiom for the coherence of the monoidal structure
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\& {((x\ot y)\ot z)\ot w} \\
+	{(x\ot (y\ot z))\ot w} \&\& {(x\ot y)\ot (z\ot w)} \\
+	{x\ot ((y\ot z)\ot w)} \&\& {x\ot (y\ot (z\ot w))}
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=1-2, to=2-3]
+	\arrow[from=1-2, to=2-1]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-3, to=3-3]
+\end{tikzcd}\] comes from the uniqueness and existence of $\alpha\colon \langle 4 \rangle \ra \langle 1 \rangle$ such that $\alpha^{-1}(\{1\})=\langle 4 \rangle^{\circ}.$ In particular, all five ways of bracketing in the diagram can be canonically identified with the image of $(x,y,z,w)$ under the composite functor \[\alpha\colon \cC^{\times 4} \simeq\cD_{\langle 4\rangle} \xra{\alpha_!} \cD_{\langle 1 \rangle 1}\simeq \cC.\]
+\end{enumerate}
+
+Using $\cD=\cC^{\ot}$ in the construction above, we can see that our constructions above recover the isomorphisms which determine the symmetric monoidal structure of $(\cC,\ot)$, up to canonical isomorphism. On the other hand, a category $\cD$ together with a Grothendieck op-fibration satisfying the Segal condition determines a symmetric monoidal structure on $\cD_{\langle 1 \rangle} = \cC$ and an equivalence $\cC^{\ot}\simeq \cD$.
+\end{construction}
+As painful as the construction above might have been, it was tractable and rigorously addressed in a few readable pages. This contrasts with the substantially harder problem of addressing higher coherences when we finally decide to endow $\oo$-categories with symmetric monoidal structures. In fact, once we get there we will find Lurie's beautiful and succinct definition in \cite{HA}:
+\begin{definition}
+    A symmetric monoidal $\oo$-category is an coCartesian fibration of simplicial sets \[p\colon \cC^{\ot} \ra \cN(\Fin_\ast)\] satisfying the Segal condition:
+    \begin{enumerate}
+        \item For every $n\geq 0$, the maps $\{\rho^{i}\colon \langle n \rangle \ra \langle 1 \rangle\}_{1\leq i \leq n}$ induce functors $\rho^{i}_!\colon \cC^{\ot}_{\langle n \rangle} \ra \cC^{\ot}_{\langle 1\rangle}$ which determine an equivalence \[\cC^{\ot}_{\langle n \rangle}\simeq (\cC_{\langle 1 \rangle}^{\ot})^{\times n}.\]
+    \end{enumerate}
+\end{definition}
+
+$\oo$-operads are just one weakening of the coCartesian fibration away...
+
+
+Anyway, hope this was a useful resource for you to get into this stupidly technical stuff.
+
+\
+
+
+\input{mybibliography.bib}
+
+\end{document}

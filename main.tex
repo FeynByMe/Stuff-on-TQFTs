@@ -1,0 +1,144 @@
+\input{preamble}
+
+\begin{document}
+
+\title{A Compendium of Topological State-Sums}
+\author{Diogo Freire de Andrade}
+
+
+\maketitle
+
+
+\tableofcontents
+
+\begin{itemize}
+
+\item It is conventional wisdom that an $n$-category describes a local or fully extended topological quantum field theory restricted to the disk.
+
+\item A Commutative Frobenius Algebra provides a global description of a 2-dimensional TQFTs.
+
+\item An \textbf{open-closed topological quantum field theory} is a symmetric monoidal functor ${\sf 2Cob}^{{\sf ext}}\ra \cC$ into a symmetric monoidal category $\cC.$
+\item The notion of open-closed TQFT can be seen as an extension of the notion of a $2$-dimensional TQFT i.e., a symmetric monoidal functor ${\sf 2Cob}\ra \cC$. We refer to this notation as a \textbf{closed TQFT}, and to morphisms of ${\sf 2Cob}$ as \textit{closed cobordisms.}
+\item Given two Morse functions $f_1,f_2\colon \Sigma \ra \RR$, the handle decompositions associated with $f_1$ and $f_2$ are related by a finite sequence of moves i.e., handles slides and handle cancellations. This means that there are diffeomorphisms such as,
+\end{itemize}
+
+\section{Orbifold Completion and Defect TQFTs: CRMS }
+
+\begin{enumerate}
+    \item They introduce a notion of $n$-dimensional topological quantum field theory (TQFT) with defects as a symmetric monoidal functor on decorated stratified bordisms of dimension $n$. 
+    \item The typical case of closed or open-closed TQFTs are special cases of defect TQFTS, and for $n=2$ and $n=3$, they claim to recover work already in the literature.
+    \item \textbf{Main construction:} "generalized orbifolds" associated to any $n$-dimensional defect TQFT. The procedure goes as follows: given a defect TQFT $\cZ$, one obtains a new TQFT $\cZ_\cA$ by decorating the Poincaré duals of triangulated bordisms with certain algebraic data $\cA$ and then evaluating with $\cZ.$ $\cA$ is calle the \textit{orbifold datum} is constrained by demanding invariance under $n$-dimensional Pachner moves.
+    \item The procedure described above generalises both state sum models and gauging of finite symmetry groups, for any $n.$
+\end{enumerate}
+\subsection{Undecorated defect bordisms}
+\textit{Let us assume we have ``working" notion of stratified bordism yielding a symmetric monoidal category ${\sf Bord}^{{\sf strat}}_n$.}
+\begin{enumerate}
+    \item For all $n\in \ZZ_+$ we define three related structures recursively
+\end{enumerate}
+
+\section{Invertible Topological Field Theories \& Homotopy Theory}
+
+\begin{definition}
+Let $(\cC,\ot,1)$ be a symmetric monoidal category and $x\in\cC$. We say that $x$ is \textbf{invertible} if there is an object $x^{-1}\in \cC$ and an isomorphism \[x\ot x^{-1}\xra{\simeq}1.\]
+\end{definition}
+\begin{lemma}
+The inverse $x^{-1}$ is unique up to unique isomorphism, so long as it exists.
+\end{lemma}
+\begin{proof}
+Let $(x^{-1},\varphi \colon x\ot x^{-1} \xra{\simeq} 1)$ and $(y,\psi\colon x\ot y \xra{\simeq}1)$ be a pair of inverses of $x,$ as defined above. Then we have the following commutative diagram
+\[\begin{tikzcd}
+	{x\ot x^{-1}\ot y} & {1\ot y\simeq y} \\
+	{x^{-1}\ot x \ot y} & {x^{-1}\ot 1\simeq x^{-1}}
+	\arrow["\wr"', from=1-1, to=2-1]
+	\arrow["\id\ot\psi"', from=2-1, to=2-2]
+	\arrow["{\varphi\ot \id}", from=1-1, to=1-2]
+	\arrow["\wr", from=1-2, to=2-2]
+\end{tikzcd}\]
+where every arrow is a unique isomorphism.
+\end{proof}
+\begin{definition}
+A \textbf{Picard groupoid} is a symmetric monoidal category which is a groupoid relative to composition and $\ot.$ In other words, every object is invertible and $\ot$-invertible.
+\end{definition}
+\begin{observation}
+Every symmetric monoidal category $\cC$, the subcategory $\cC^\times$ of invertible objects and invertible morphisms is a Picard groupoid. As an example, $\Vect^{\times}_\CC$ corresponds to the subcategory of complex lines and non-zero linear maps between them.
+\end{observation}
+\begin{definition}
+A topological field theory $\cZ\colon \Bord^{\xi}_n\ra \Vect_\CC$ is \textit{invertible} if it factors through $\cC^{\times} \cofib \cC$ i.e. if there exists a symmetric monoidal functor $\cZ \colon \Bord^{\xi}_n \ra \cC^{\times}$ such that 
+\[\begin{tikzcd}
+	{\Bord^{\xi}_n} & \cC \\
+	& {\cC^\times}
+	\arrow["\cZ", from=1-1, to=1-2]
+	\arrow[hook, from=2-2, to=1-2]
+	\arrow["\overline\cZ"', dashed, from=1-1, to=2-2]
+\end{tikzcd}\]
+commutes.
+\end{definition}
+
+\begin{observation}
+Equivalently, we say that a TFT $\cZ$ is invertible if:
+\begin{itemize}
+    \item for any closed $(n-1)$-dimensional $\xi$-manifold $M$, $Z(M)$ is $\ot$-invertible. In the customary case of $\Vect$, this implies that $Z(M)$ is a complex line and for any bordism $X$, the linear map $Z(X)$ is invertible under composition i.e. a non-zero scalar $z_{M}\in\CC^{\times}.$
+    \item Alternatively, invertible topological field theories can be defined as the objects in the Picard groupoid $({\sf TFT}^{\xi}_n)^\times$. Where the tensor product $\ot$ in ${\sf TFT}^\xi_n$ is defined point-wise i.e. $(\cZ_1\ot\cZ_2)(M):=\cZ_1(M)\ot\cZ_2(M)\footnote{In condensed mater physics, this operation is called stacking or layering. It correspondings to turning two-different systems/theories in the same material with no interaction.}.$
+\end{itemize}
+\end{observation}
+\subsection{SKK}
+\begin{theorem}[Galatius-Madsen-Tillman-Weiss] 
+The data for $|\Bord^{\xi}_n|$ is \begin{itemize}
+    \item $\pi_0 = \Omega^{\xi}_n-1$,
+    \item $\pi_1 = {\sf SKK}^\xi_n$
+    \item $k$-invariant is $M\mapsto M\times S^1$, where $S^1$ carries the $\xi$-structure induced by the Lie group framing.
+\end{itemize}
+\end{theorem}
+\begin{cor}
+Taking the partition function defines an isomorphism of abelian groups $$({\sf TFT}_n^\xi)^\times \ra \Hom({\sf SKK}^\xi_n,\CC^\times).$$
+\end{cor}
+\begin{proof}
+First, why there even such a map? A map of Picard groupoids $\cC\ra \cD$ is equivalent data to abelian group maps $\pi_0\cC\ra \pi_0\cD$ and $\pi_1\cC\ra \pi_1\cD$ intertwining the $k$-invariant. In our setting, the partition function of an invertible TFT is the map is the map $\pi_1$; using 
+\end{proof}
+
+\section{Cut and Paste Invariants and TQFTs}
+Cut and past invariants, or SK invariants, are functions on the set of smooth manifolds that are invariant under cutting and pasting operation. There is a surprisingly natural group homomorphism between the group of invertible TQFTs and the group of SKK invariants and describe how these groups fit into an exact sequence. This leads us to conclude that all positive real-valued SKK invariants can be realized as restrictions of invertible TQFTs. 
+
+\begin{enumerate}
+    \item The motivation to study these invariants came from the study of the index of elliptic operators.
+    \item In 1953, Vladimir Rokhlin found a conncetion between Pontryagin classes and the signature.
+    \item Hirzebruch proved his famous theorem relating the signature and the Pontryagin numbers, an immensely important development in the theory of characteristic classes.
+    \item In 1966 Novikov presented the first additivity property of the signature in 1966
+\end{enumerate}
+\subsection{Cut and Paste}
+\begin{motivation}
+We will describe an equivalence relation on manifolds called the \textbf{cut and paste} relation. For an oriented manifold $M$, we perform the cut and paste operation by cutting it along a codimension-$1$ submanifold $\Sigma$ with trivial normal bundle and paste the resulting manifold back together vi an orientation-preserving diffeomorphism $f\colon \Sigma \ra \Sigma.$ 
+\end{motivation}
+
+\section{Factorization Homology \& Extended Topological Field Theories}
+
+
+\subsection{The Moria $(\oo,n)$-category of $E_n$-algebras}
+Scheimbauer constructs a target symmetric monoidal $(\oo,n)$-category for her fully extended topological field theory: the symmetric monoidal Morita $(\oo,n)$-category $\Alg_n=\Alg_n(\cS)$ of $\cE_n$-algebras. Recall that $\cE_n$-algebras are objects in $\Fun^\ot(\Disk_n,\cS)$, in particular they're an object in $\cS$.
+
+Lurie proves the existence of an equivalence between $\cE_n$-algebras and locally constant factorization algebras on $(0,1)^n\overset{\chi}{\cong} \RR^n.$ Scheimbauer makes use of this equivalence to define the objects of the $(\oo,n)$-category of $\cE_n$-algebras as a suitable space of locally constant factorization algebras on $(0,1)^n.$ As (higher) morphisms she uses factorization algebras which are locally constant with respect to a certain stratification to model the Morita category of $\cE_n$-algebras. 
+
+\subsection{The $n$-fold Segal space of closed covers in $(0,1)$}
+Let us begin by constructing the $1$-fold Segal space ${\sf Covers}_\bullet$ of $(0,1)$ by closed intervals.
+
+\subsubsection{Collapse-and-rescale maps}
+Succintly, the collapse-and-rescale maps of Scheimbauer do exactly as the name says. They take a closed $(b,a]\subseteq [0,1]$ and collapse it to a point in $[0,1],$ and rescale everything else back to $[0,1]$
+\begin{definition}
+Assume that $(b,a)\neq (0,1)$. If $a\leq b$, then $\rho^b_a=\id_{[0,1]}$ otherwise we define \[\rho^b_a(x) = \begin{cases}\frac{x}{1-(a-b)}, & x\leq b, \\
+\frac{b}{1-(a-b)}, & a\leq x \leq b, \\
+\frac{x-(a-b)}{1-(a-b)}, & a\leq x.\end{cases}\]
+\end{definition}
+\begin{observation}
+$\rho^d_c\ast\rho^b_a=\rho^{\rho^b_a(d)}_{\rho^b_a(c)}\circ \rho^b_a$
+\end{observation}
+Some properties of this map are defined and checked.
+\subsection{The sets \Covers_k}
+We will define simplicial spaces as functors $\Delta^{\op}\ra \Spaces$, where we take $\Spaces= {\sf sSet}.$
+So we are defining $\Delta^{\op}\times \Delta^{\op}\ra \Set$ functors.
+
+For every integer $k\geq 0$ we define $\{I_0\leq \cdots \cdots I_k\}$ where $I_j\subseteq (0,1)$ such that $I_j$ has non-empty interior, is closed in $(0,1)$ and it forms an open cover of $(0,1).$ The left endpoints $a_j$, and the right endpoints, denoted by $b_j$, are ordered.
+
+As far as this definition goes we have only managed to construct a discrete set, when we really want a space, so let us define the higher-order cells of $\Covers_k$. We begin with the $1$-simplices: these consist of a smooth family of covers $(I_0(s)\leq I_1(s)\leq \cdots \leq I_k(s))$ over $|\Delta^1|$. Then a smooth family of orientation-preserving diffeomorphisms $\phi_s,t\colon (0,1)\ra (0,1))_{s,t\in |\Delta^1|}$ is said to \textit{intertwine with the composed covers} if the following condition is satisfied for every morphism $f\colon [m]\ra [1]$ in the simplex category $\Delta$ for $m\leq 1:$
+
+Let $|f|\colon |\Delta^m|\ra |\Delta^1|$ be the geometric realization of $f.$
+\end{document}
